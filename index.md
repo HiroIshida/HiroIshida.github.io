@@ -12,6 +12,9 @@ I am a final year PhD student in the [JSK Lab](http://www.jsk.t.u-tokyo.ac.jp/) 
 - 2016.4 - 2018.3: M.Eng. in Aerospace Engineering, The University of Tokyo
 - 2012.4 - 2016.3: M.Eng. in Aerospace Engineering, Osaka Prefecture University
 
+## News
+- 2024.05.13-16: Attending **ICRA 2024**, Yokohama, Japan
+
 ## Publications
 - **H. Ishida**, N. Hiraoka, K. Okada and M. Inaba CoverLib: Classifiers-equipped Experience Library by Iterative Problem Distribution Coverage Maximization for Domain-tuned Motion Planning, submitted to IEEE Transactions on Robotics, [arXiv link (version 2024/05/05)](https://arxiv.org/abs/2405.02968).
 
