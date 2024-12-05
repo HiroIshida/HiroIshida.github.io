@@ -7,7 +7,8 @@ Before starting my PhD, I studied aerospace engineering for my B.Eng and M.Eng. 
 ## Contact
 - email: h-ishida<img src="/asset/email.png" alt="email" height="25">.i.u-tokyo.ac.jp
 - github: [HiroIshida](https://github.com/HiroIshida)
-- linkedin: [Hirokazu Ishida](https://www.linkedin.com/in/ishida-h-209330155/)
+- linkedin: [Hirokazu Ishida](https://www.linkedin.com/in/hirokazu-i-209330155)
+
 
 ## Education
 - 2019.4 - Present: Ph.D. student in Mechano-Informatics, The University of Tokyo
