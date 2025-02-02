@@ -28,3 +28,6 @@ Before starting my PhD, I studied aerospace engineering for my B.Eng and M.Eng. 
 - <span id="fer"> **H. Ishida**, K. Okada and M. Inaba, Classifier-Aided Maximization of Feasible-Error-Region for Robust Manipulation Learning, *IEEE Robotics and Automation Letters (RA-L)*, 2021, [Paper link](https://ieeexplore.ieee.org/abstract/document/9406349).
 
 - See more in [Google Scholar](https://scholar.google.com/citations?user=aw4sCFsAAAAJ&hl=ja&oi=ao)
+
+## Grant-in-Aid
+- JSPS Postdoctoral Research Fellow (学振特別研究員PD), 2024  (withdrawn due to postponement of graduation)
