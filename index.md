@@ -1,16 +1,14 @@
 <img src="/asset/profile.jpg" alt="photo" height="200">
 
-I am a PhD student in the [JSK Lab](http://www.jsk.t.u-tokyo.ac.jp/) at the University of Tokyo. My research focuses on developing learning methods for robotic skills (motion planning and manipulation) which explicitly take advantage of feasibility and capability assessment.
-
-To highlight this motivation, our recent [T-RO article](https://arxiv.org/abs/2405.02968) introduces a method to construct/reuse a database of reusable experiences (analogous to initial solutions in numerical optimization), specifically designed to accelerate online planning across problems in a user-specified domain. The construction process employs classifiers to efficiently cover the problem space. The [RA-L article](https://ieeexplore.ieee.org/document/9406349) defines a robot's feasible error region and develops a policy searching method that identifies optimal policy parameters to maximize the region volume.
+I am a PhD student in the [JSK Lab](http://www.jsk.t.u-tokyo.ac.jp/) at the University of Tokyo. My research focuses on developing learning methods for robotic skills (motion planning and manipulation) which explicitly take advantage of feasibility and capability assessment. To highlight this motivation, our recent [T-RO article](https://arxiv.org/abs/2405.02968) introduces a method to construct/reuse a database of reusable experiences (analogous to initial solutions in numerical optimization), specifically designed to accelerate online planning across problems in a user-specified domain. The construction process employs deep-NN classifiers to efficiently cover the problem space. The [RA-L article](https://ieeexplore.ieee.org/document/9406349) defines a robot's feasible error region and develops a policy searching method that identifies optimal policy parameters to maximize the region volume.
 
 Alongside research activities, I am interested in writing fast and well modularized software. A notable work includes [plainmp](https://github.com/HiroIshida/plainmp): a highly tuned motion planning library for articulated robots written in C++ with Python bindings. It solves moderately complex planning problems (e.g., 8DOF Fetch in front of table) in less than 1ms on a laptop, which is, to my knowledge, significantly faster compared to standard implementations.
 
-Before starting my PhD, I studied aerospace engineering for my B.Eng and M.Eng.
-
 ## Contact
+<span style="color:maroon;">I am currently seeking full-time Engineer/Researcher roles (May–June 2025 ~). Feel free to reach out if my background aligns.</span>
 - email: h-ishida<img src="/asset/email.png" alt="email" height="25">.i.u-tokyo.ac.jp
 - github: [HiroIshida](https://github.com/HiroIshida)
+- X(twitter): [__HiroIshida](https://x.com/__HiroIshida)
 - linkedin: [Hirokazu Ishida](https://www.linkedin.com/in/hirokazu-i-209330155)
 - google scholar: [Hirokazu Ishida](https://scholar.google.com/citations?user=aw4sCFsAAAAJ&hl=ja&oi=ao)
 
