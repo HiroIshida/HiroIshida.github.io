@@ -6,12 +6,13 @@ To highlight this motivation, our recent [T-RO article](https://arxiv.org/abs/24
 
 Alongside research activities, I am interested in writing fast and well modularized software. A notable work includes [plainmp](https://github.com/HiroIshida/plainmp): a highly tuned motion planning library for articulated robots written in C++ with Python bindings. It solves moderately complex planning problems (e.g., 8DOF Fetch in front of table) in less than 1ms on a laptop, which is, to my knowledge, significantly faster compared to standard implementations.
 
-Before starting my PhD, I studied aerospace engineering for my B.Eng and M.Eng. Some of my works from that time are included in my [google scholar](https://scholar.google.com/citations?user=aw4sCFsAAAAJ&hl=ja&oi=ao) profile.
+Before starting my PhD, I studied aerospace engineering for my B.Eng and M.Eng.
 
 ## Contact
 - email: h-ishida<img src="/asset/email.png" alt="email" height="25">.i.u-tokyo.ac.jp
 - github: [HiroIshida](https://github.com/HiroIshida)
 - linkedin: [Hirokazu Ishida](https://www.linkedin.com/in/hirokazu-i-209330155)
+- google scholar: [Hirokazu Ishida](https://scholar.google.com/citations?user=aw4sCFsAAAAJ&hl=ja&oi=ao)
 
 
 ## Education
@@ -26,7 +27,13 @@ Before starting my PhD, I studied aerospace engineering for my B.Eng and M.Eng. 
 
 - <span id="fer"> **H. Ishida**, K. Okada and M. Inaba, Classifier-Aided Maximization of Feasible-Error-Region for Robust Manipulation Learning, *IEEE Robotics and Automation Letters (RA-L)*, 2021, [Paper link](https://ieeexplore.ieee.org/abstract/document/9406349).
 
-- See more in [Google Scholar](https://scholar.google.com/citations?user=aw4sCFsAAAAJ&hl=ja&oi=ao)
+- T. Chujo, **H. Ishida**, O. Mori, J. Kawaguchi: Liquid crystal device with reflective microstructure for attitude control, *Journal of Spacecraft and Rockets*, 2018, [Paper link](https://arc.aiaa.org/doi/10.2514/1.A34165).
+
+- **H. Ishida**, Y. Tsuda, Robust terrain-aided localization of spacecraft using low-fidelity asteroid shape model, *SICE International Symposium on Control System*, 2018, [Paper link](https://ieeexplore.ieee.org/abstract/document/8330165).
+
+- **H. Ishida**, T. Chujo, O. Mori, J. Kawaguchi: Evaluation of Optical Properties of Advanced Reflectivity Control Device for Solar Sails by Numerical Simulation, *68th International Astronautical Congress (IAC)*, 2017, [Paper link](https://drive.google.com/file/d/1BabHPoOQsbKlnJRGDYh8wCp01dckphKN/view?usp=drive_link).
+
+- **H. Ishida**, T. Chujo, O. Mori, J. Kawaguchi: Optimal design of advanced reflectivity control device for solar sails considering polarization properties of liquid crystal, *Proceedings of the 26th International Symposium on Space Flight Dynamics (ISSFD)*, 2017, [Paper link](https://issfd.org/ISSFD_2017/paper/ISTS-2017-d-061__ISSFD-2017-061.pdf).
 
 ## Grant-in-Aid
 - JSPS Postdoctoral Research Fellow (学振特別研究員PD), 2024  (withdrawn due to postponement of graduation)
