@@ -4,6 +4,8 @@ I am a PhD student in the [JSK Lab](http://www.jsk.t.u-tokyo.ac.jp/) at the Univ
 
 Alongside research activities, I am interested in writing fast and well modularized software. A notable work includes [plainmp](https://github.com/HiroIshida/plainmp): a highly tuned motion planning library for articulated robots written in C++ with Python bindings. It solves moderately complex planning problems (e.g., 8DOF Fetch in front of table) in less than 1ms on a laptop, which is, to my knowledge, significantly faster compared to standard implementations.
 
+My industrial experience includes part-time jobs at two companies: Tier IV (2021.4 - 2022.6), where I worked on autonomous driving software and gained experience developing high-quality software in a team with large codebases (Some PRs are publicly available [here](https://github.com/autowarefoundation/autoware.universe/commits?author=HiroIshida). At Integral AI (2024.4 - 2024.11), a startup company, I gained valuable experience working on projects in the very initial phases.
+
 ## Contact
 <span style="color:maroon;">I am currently seeking full-time Engineer/Researcher roles (May–June 2025 ~). Feel free to reach out if my background aligns.</span>
 - email: h-ishida<img src="/asset/email.png" alt="email" height="25">.i.u-tokyo.ac.jp
