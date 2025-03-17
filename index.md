@@ -20,7 +20,7 @@
 - 2012.4 - 2016.3: M.Eng. in Aerospace Engineering, Osaka Prefecture University
 
 ## Selected publications
-- <span id="coverlib"> **H. Ishida**, N. Hiraoka, K. Okada and M. Inaba CoverLib: Classifiers-equipped Experience Library by Iterative Problem Distribution Coverage Maximization for Domain-tuned Motion Planning, *IEEE Transactions on Robotics (T-RO)*, <span style="color:maroon;">Accepted in Feb. 2025 (to appear)</span>, [arXiv link](https://arxiv.org/abs/2405.02968).
+- <span id="coverlib"> **H. Ishida**, N. Hiraoka, K. Okada and M. Inaba CoverLib: Classifiers-equipped Experience Library by Iterative Problem Distribution Coverage Maximization for Domain-tuned Motion Planning, *IEEE Transactions on Robotics (T-RO)*, 2025, [arXiv link](https://arxiv.org/abs/2405.02968), [IEEE link](https://ieeexplore.ieee.org/document/10930729).
 
 - N. Hiraoka, **H. Ishida**, T. Hiraoka, K. Kojima, K. Okada, M. Inaba: Sampling-based Global Path Planning using Convex Polytope Approximation for Narrow Collision-free Space of Humanoid. *International Journal of Humanoid Robotics*, 2024, [Paper link](https://www.worldscientific.com/doi/abs/10.1142/S0219843624500051).
 
