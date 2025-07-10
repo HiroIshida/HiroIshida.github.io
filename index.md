@@ -1,10 +1,11 @@
 <img src="/asset/profile.jpg" alt="photo" height="200">
 
-**I am a PhD student** in the [JSK Lab](http://www.jsk.t.u-tokyo.ac.jp/) at the University of Tokyo. My research focuses on developing learning methods for robotic skills (motion planning and manipulation) which explicitly take advantage of feasibility and capability assessment. Research range includes data-driven motion planning (T-RO 2025) and policy search for manipulation (RA-L 2021).
+**My industrial experience** includes [SB Intuitions](https://www.sbintuitions.co.jp/en/) (2025.7~) full-time, where I will be contributing to launching their robotics team as the very first member. I experienced part-time jobs at two companies: [Tier IV](https://tier4.jp/en/) (2021.4 - 2022.6), where I worked on autonomous driving software and gained experience developing high-quality software in a team with large codebases (Some PRs are publicly available [here](https://github.com/autowarefoundation/autoware.universe/commits?author=HiroIshida)). At [Integral AI](https://www.integral.ai/) (2024.4 - 2024.11), a startup company, I gained valuable experience working on projects in the very initial phases.
+
+
+**I am also a PhD student** in the [JSK Lab](http://www.jsk.t.u-tokyo.ac.jp/) at the University of Tokyo. My research focuses on developing learning methods for robotic skills (motion planning and manipulation) which explicitly take advantage of feasibility and capability assessment. Research range includes data-driven motion planning (T-RO 2025) and policy search for manipulation (RA-L 2021).
 
 **Alongside research activities**, I like writing fast and well modularized software. A notable work includes [plainmp](https://github.com/HiroIshida/plainmp): a highly tuned motion planning library for articulated robots written in C++ with Python bindings. It solves moderately complex planning problems (e.g., 8DOF Fetch in front of table) in less than 1ms on a laptop, which is, to my knowledge, significantly faster compared to standard implementations.
-
-**My industrial experience** includes [SB Intuitions](https://www.sbintuitions.co.jp/en/) (2025.7~) full-time, where I will be contributing to launching their robotics team as the very first member. I experienced part-time jobs at two companies: [Tier IV](https://tier4.jp/en/) (2021.4 - 2022.6), where I worked on autonomous driving software and gained experience developing high-quality software in a team with large codebases (Some PRs are publicly available [here](https://github.com/autowarefoundation/autoware.universe/commits?author=HiroIshida)). At [Integral AI](https://www.integral.ai/) (2024.4 - 2024.11), a startup company, I gained valuable experience working on projects in the very initial phases.
 
 ## Contact
 - email: h-ishida<img src="/asset/email.png" alt="email" height="25">.i.u-tokyo.ac.jp
