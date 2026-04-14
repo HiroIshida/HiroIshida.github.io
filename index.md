@@ -8,7 +8,8 @@
 **Alongside research activities**, I like writing fast and well modularized software. A notable work includes [plainmp](https://github.com/HiroIshida/plainmp): a highly tuned motion planning library for articulated robots written in C++ with Python bindings. It solves moderately complex planning problems (e.g., 8DOF Fetch in front of table) in less than 1ms on a laptop, which is, to my knowledge, significantly faster compared to standard implementations.
 
 ## Contact
-- email: h-ishida<img src="/asset/email.png" alt="email" height="25">.i.u-tokyo.ac.jp
+- email (work): <img src="/asset/sbemail.png" alt="email" height="25">
+- email (univ): h-ishida<img src="/asset/email.png" alt="email" height="25">.i.u-tokyo.ac.jp
 - github: [HiroIshida](https://github.com/HiroIshida)
 - X(twitter): [__HiroIshida](https://x.com/__HiroIshida)
 - X(twitter) (Japanese): [orematasaburou](https://x.com/orematasaburou)
