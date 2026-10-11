@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hirokazu Ishida (石田寛和)</title>
+    <meta name="description" content="Hirokazu Ishida — researcher and robotics team lead at SB Intuitions, and PhD student at the University of Tokyo. Research, publications, and contact information.">
+    <link rel="canonical" href="https://hiroishida.github.io/">
+    <style>
+      /* All styling lives here; no build tools or external stylesheets are needed. */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: #111;
+        background: #fdfdfd;
+        font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        overflow-wrap: break-word;
+      }
+
+      .wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 30px;
+      }
+
+      header {
+        border-top: 5px solid #424242;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 12px 0;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 26px;
+        font-weight: 300;
+        letter-spacing: -1px;
+      }
+
+      main.wrapper {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+
+      h2 {
+        margin: 0 0 15px;
+        font-size: 24px;
+        font-weight: 400;
+      }
+
+      p, ul {
+        margin: 0 0 15px;
+      }
+
+      ul {
+        padding-left: 30px;
+      }
+
+      a {
+        color: #2a7ae2;
+        text-decoration: none;
+      }
+
+      a:visited {
+        color: #1756a9;
+      }
+
+      a:hover {
+        color: #111;
+        text-decoration: underline;
+      }
+
+      img {
+        max-width: 100%;
+        vertical-align: middle;
+      }
+
+      .profile {
+        width: auto;
+        height: 200px;
+      }
+
+      .email {
+        width: auto;
+        height: 25px;
+      }
+
+      .publications li {
+        margin-bottom: 15px;
+      }
+
+      @media (max-width: 600px) {
+        .wrapper {
+          padding-right: 15px;
+          padding-left: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <h1>Hirokazu Ishida (<span lang="ja">石田寛和</span>)</h1>
+      </div>
+    </header>
+
+    <main class="wrapper">
+      <p><img class="profile" src="asset/profile.jpg" alt="Hirokazu Ishida" height="200"></p>
+
+      <p><strong>I am a Researcher (July 2025 ~) and Robotics Team Lead (Dec 2025 ~)</strong> at <a href="https://www.sbintuitions.co.jp/en/">SB Intuitions</a>, specializing in large-scale robot learning. My primary focus is on architecting highly optimized data/software pipelines and the algorithmic side of robot learning. Yet, I am a roboticist at heart. I never hesitate to get my hands dirty in the team whenever necessary; whether it’s assembling fleet of robots, soldering, or spending days debugging complex hardware issues.</p>
+
+      <p><strong>I am also a PhD student</strong> in the <a href="http://www.jsk.t.u-tokyo.ac.jp/">JSK Lab</a> at the University of Tokyo. My research focuses on developing learning methods for robotic skills (motion planning and manipulation) which explicitly take advantage of feasibility and capability assessment. Research range includes data-driven motion planning (IEEE T-RO 2025) and policy search for manipulation (IEEE RA-L 2021).</p>
+
+      <p><strong>Alongside research activities</strong>, I like writing fast and well modularized software. A notable work includes <a href="https://github.com/HiroIshida/plainmp">plainmp</a>: a highly tuned motion planning library for articulated robots written in C++ with Python bindings. It solves moderately complex planning problems (e.g., 8DOF Fetch in front of table) in less than 1ms on a laptop, which is, to my knowledge, significantly faster compared to standard implementations.</p>
+
+      <section aria-labelledby="contact">
+        <h2 id="contact">Contact</h2>
+        <ul>
+          <li>email (work): <img class="email" src="asset/sbemail.png" alt="email" height="25"></li>
+          <li>email (univ): h-ishida<img class="email" src="asset/email.png" alt="email" height="25">.i.u-tokyo.ac.jp</li>
+          <li>github: <a href="https://github.com/HiroIshida">HiroIshida</a></li>
+          <li>X(twitter): <a href="https://x.com/__HiroIshida">__HiroIshida</a></li>
+          <li>X(twitter) (Japanese): <a href="https://x.com/orematasaburou">orematasaburou</a></li>
+          <li>linkedin: <a href="https://www.linkedin.com/in/hirokazu-i-209330155">Hirokazu Ishida</a></li>
+          <li>google scholar: <a href="https://scholar.google.com/citations?user=aw4sCFsAAAAJ&amp;hl=ja&amp;oi=ao">Hirokazu Ishida</a></li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="education">
+        <h2 id="education">Education</h2>
+        <ul>
+          <li>2019.4 - Present: Ph.D. student in Mechano-Informatics, The University of Tokyo</li>
+          <li>2016.4 - 2018.3: M.Eng. in Aerospace Engineering, The University of Tokyo</li>
+          <li>2012.4 - 2016.3: M.Eng. in Aerospace Engineering, Osaka Prefecture University</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="fellowships-and-scholarships">
+        <h2 id="fellowships-and-scholarships">Fellowships and scholarships</h2>
+        <ul>
+          <li>JSPS Postdoctoral Research Fellow (<span lang="ja">学振特別研究員PD</span>), 2024 (withdrawn due to postponement of graduation)</li>
+          <li>Scholarship for study abroad by Nakajima Foundation (<span lang="ja">中島記念国際交流財団海外留学奨学金</span>), Nov. 2017. (withdrawn)</li>
+        </ul>
+      </section>
+
+      <section class="publications" aria-labelledby="selected-publications">
+        <h2 id="selected-publications">Selected publications</h2>
+        <ul>
+          <li id="coverlib"><strong>H. Ishida</strong>, N. Hiraoka, K. Okada and M. Inaba CoverLib: Classifiers-equipped Experience Library by Iterative Problem Distribution Coverage Maximization for Domain-tuned Motion Planning, <em>IEEE Transactions on Robotics (T-RO)</em>, 2025, <a href="https://arxiv.org/abs/2405.02968">arXiv link</a>, <a href="https://ieeexplore.ieee.org/document/10930729">IEEE link</a>.</li>
+
+          <li>N. Hiraoka, <strong>H. Ishida</strong>, T. Hiraoka, K. Kojima, K. Okada, M. Inaba: Sampling-based Global Path Planning using Convex Polytope Approximation for Narrow Collision-free Space of Humanoid. <em>International Journal of Humanoid Robotics</em>, 2024, <a href="https://www.worldscientific.com/doi/abs/10.1142/S0219843624500051">Paper link</a>.</li>
+
+          <li id="fer"><strong>H. Ishida</strong>, K. Okada and M. Inaba, Classifier-Aided Maximization of Feasible-Error-Region for Robust Manipulation Learning, <em>IEEE Robotics and Automation Letters (RA-L)</em>, 2021, <a href="https://ieeexplore.ieee.org/abstract/document/9406349">Paper link</a>.</li>
+
+          <li>T. Chujo, <strong>H. Ishida</strong>, O. Mori, J. Kawaguchi: Liquid crystal device with reflective microstructure for attitude control, <em>Journal of Spacecraft and Rockets</em>, 2018, <a href="https://arc.aiaa.org/doi/10.2514/1.A34165">Paper link</a>.</li>
+
+          <li><strong>H. Ishida</strong>, T. Chujo, O. Mori, J. Kawaguchi: Optimal design of advanced reflectivity control device for solar sails considering polarization properties of liquid crystal, <em>Proceedings of the 26th International Symposium on Space Flight Dynamics (ISSFD)</em>, 2017, <a href="https://issfd.org/ISSFD_2017/paper/ISTS-2017-d-061__ISSFD-2017-061.pdf">Paper link</a>.</li>
+        </ul>
+      </section>
+
+      <section class="publications" aria-labelledby="other-publications">
+        <h2 id="other-publications">Other publications</h2>
+        <ul>
+          <li>L. Wu, H. Jia, K. Kawaharazuka, <strong>H. Ishida</strong>, K. Okada, Dexterous Grasp Data Augmentation based on Grasp Synthesis with Fingertip Workspace Cloud and Contact-Aware Sampling, <em>Advanced Robotics</em>, 2025 (in press).</li>
+
+          <li>J. Kawaguchi, O. Mori, T. Chujo, <strong>H. Ishida</strong>: Optical device, attitude control apparatus, and spacecraft. <em>United States patent</em> US 11,679,901. 2023 Jun 20, <a href="https://patents.google.com/patent/US11679901B2/en">link</a>.</li>
+
+          <li><strong>H. Ishida</strong>, Y. Tsuda, Robust terrain-aided localization of spacecraft using low-fidelity asteroid shape model, <em>SICE International Symposium on Control System</em>, 2018, <a href="https://ieeexplore.ieee.org/abstract/document/8330165">Paper link</a>.</li>
+
+          <li><strong>H. Ishida</strong>, T. Chujo, O. Mori, J. Kawaguchi: Evaluation of Optical Properties of Advanced Reflectivity Control Device for Solar Sails by Numerical Simulation, <em>68th International Astronautical Congress (IAC)</em>, 2017, <a href="https://drive.google.com/file/d/1BabHPoOQsbKlnJRGDYh8wCp01dckphKN/view?usp=drive_link">Paper link</a>.</li>
+
+          <li><strong>H. Ishida</strong>, Y. Tsuda: Range Measurement based Localization between Mothership and Lander Considering Asteroid Shape Using Particle Filter, <em>Proceedings of the 26th International Symposium on Space Flight Dynamics (ISSFD)</em>, 2017.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
