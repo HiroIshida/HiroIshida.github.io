@@ -1,5 +1,5 @@
 *~
-/blog/*.html
+/post/*.html
 /_site/
 /.venv/
 __pycache__/

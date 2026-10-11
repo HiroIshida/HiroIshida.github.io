@@ -32,10 +32,10 @@ jobs:
         run: python -m pip install Markdown==3.7
       - name: Build website
         run: |
-          mkdir -p _site/blog
+          mkdir -p _site/post
           cp *.html .nojekyll _site/
           cp -R asset _site/asset
-          python build_blog.py --output-dir _site/blog
+          python build_post.py --output-dir _site/post
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

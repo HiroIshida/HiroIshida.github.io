@@ -3,7 +3,7 @@
 # requires-python = ">=3.8"
 # dependencies = ["Markdown==3.7"]
 # ///
-"""Render blog/*.md beside their sources, or into --output-dir for publishing."""
+"""Render post/*.md and an article index, optionally into --output-dir."""
 
 import argparse
 from datetime import date
@@ -18,7 +18,7 @@ try:
     from markdown.util import AtomicString
 except ImportError:
     raise SystemExit("Install Markdown: python3 -m pip install Markdown==3.7\n"
-                     "Or run: uv run build_blog.py")
+                     "Or run: uv run build_post.py")
 
 
 ROOT = Path(__file__).resolve().parent
@@ -55,6 +55,9 @@ STYLE = """
       .post-header { margin-bottom: 26px; }
       h1 { margin: 0 0 8px; font-size: 28px; line-height: 1.5; font-weight: 400; }
       .metadata { display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--muted); font-size: 13px; }
+      .post-list { margin: 24px 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+      .post-list li { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+      .post-list time { color: var(--muted); font-size: 14px; }
       p, ul, ol { margin: 0 0 18px; }
       h2 { margin: 34px 0 16px; font-size: 23px; line-height: 1.5; font-weight: 400; }
       h3 { margin: 24px 0 8px; font-size: 17px; font-weight: 600; }
@@ -91,6 +94,7 @@ STYLE = """
         .site-name { font-size: 17px; }
         h1 { font-size: 26px; }
         h2 { font-size: 21px; }
+        .post-list li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
         .equation { padding: 10px; }
         table th, table td { padding: 10px 7px; font-size: 13px; }
         table td:first-child { width: 34%; }
@@ -118,7 +122,7 @@ class MathJaxPattern(InlineProcessor):
         return element, match.start(0), match.end(0)
 
 
-def render(source):
+def read_post(source):
     md = markdown.Markdown(
         extensions=["meta", "tables", "fenced_code", "attr_list", "md_in_html"],
         output_format="html",
@@ -131,20 +135,21 @@ def render(source):
     for field in ("title", "date"):
         if not metadata.get(field):
             raise ValueError("missing metadata: " + field)
-    published = date.fromisoformat(metadata["date"])
-    title = escape(metadata["title"])
-    author = escape(metadata.get("author", AUTHOR))
-    description = escape(metadata.get("description", metadata["title"]))
-    canonical = SITE_URL + "/blog/" + quote(source.with_suffix(".html").name)
+    metadata["date"] = date.fromisoformat(metadata["date"])
+    return metadata, body
+
+
+def page(title, description, canonical, body, navigation, mathjax=False):
+    script = '<script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-svg.js"></script>' if mathjax else ""
     return f'''<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{title} | {author}</title>
-    <meta name="description" content="{description}">
-    <link rel="canonical" href="{canonical}">
-    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-svg.js"></script>
+    <title>{escape(title)} | {AUTHOR}</title>
+    <meta name="description" content="{escape(description)}">
+    <link rel="canonical" href="{escape(SITE_URL + canonical)}">
+    {script}
     <style>{STYLE}
     </style>
   </head>
@@ -152,48 +157,90 @@ def render(source):
     <header class="site-header">
       <div class="wrapper">
         <a class="site-name" href="../index.html">{AUTHOR}</a>
-        <a class="back-link" href="../index.html">← Home</a>
+        {navigation}
       </div>
     </header>
     <main class="wrapper">
-      <article aria-labelledby="post-title">
-        <header class="post-header">
-          <h1 id="post-title">{title}</h1>
-          <div class="metadata">
-            <time datetime="{published.isoformat()}">{published.year}年{published.month}月{published.day}日</time>
-            <span>{author}</span>
-          </div>
-        </header>
 {body}
-        <footer class="post-footer"><a href="../index.html">← トップページへ戻る</a></footer>
-      </article>
     </main>
   </body>
 </html>
 '''
 
 
+def render_post(source, metadata, body):
+    published = metadata["date"]
+    content = f'''
+      <article aria-labelledby="post-title">
+        <header class="post-header">
+          <h1 id="post-title">{escape(metadata["title"])}</h1>
+          <div class="metadata">
+            <time datetime="{published.isoformat()}">{published.year}年{published.month}月{published.day}日</time>
+            <span>{escape(metadata.get("author", AUTHOR))}</span>
+          </div>
+        </header>
+{body}
+        <footer class="post-footer"><a href="index.html">← 記事一覧へ戻る</a></footer>
+      </article>
+'''
+    return page(
+        metadata["title"], metadata.get("description", metadata["title"]),
+        "/post/" + quote(source.with_suffix(".html").name), content,
+        '<a class="back-link" href="index.html">← Posts</a>', mathjax=True,
+    )
+
+
+def render_index(posts):
+    items = []
+    for filename, metadata in sorted(posts, key=lambda post: (-post[1]["date"].toordinal(), post[0])):
+        published = metadata["date"].isoformat()
+        items.append(
+            f'<li><time datetime="{published}">{published}</time>'
+            f'<a href="{quote(filename)}">{escape(metadata["title"])}</a></li>'
+        )
+    body = '<h1>Posts</h1>\n<ul class="post-list">\n' + "\n".join(items) + '\n</ul>'
+    return page(
+        "Posts", "Hirokazu Ishidaの記事一覧。", "/post/", body,
+        '<a class="back-link" href="../index.html">← Home</a>',
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("sources", nargs="*", type=Path, help="Markdown files (default: blog/*.md)")
+    parser.add_argument("sources", nargs="*", type=Path, help="Markdown files (default: post/*.md)")
     parser.add_argument("--output-dir", type=Path, help="Output directory (default: next to each source)")
     args = parser.parse_args()
-    sources = args.sources or sorted((ROOT / "blog").glob("*.md"))
+    sources = args.sources or sorted((ROOT / "post").glob("*.md"))
     if not sources:
         parser.error("no Markdown posts found")
+    outputs = {}
+    indexes = {}
     for source in sources:
         if source.suffix != ".md":
             parser.error("expected a .md file: " + str(source))
+        if source.stem == "index":
+            parser.error("index.md is reserved for the generated article index")
         destination = source.with_suffix(".html")
         if args.output_dir:
             destination = args.output_dir / destination.name
+        destination = destination.resolve()
+        if destination in outputs:
+            parser.error("duplicate output path: " + str(destination))
         try:
-            page = render(source)
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            destination.write_text(page, encoding="utf-8")
+            metadata, body = read_post(source)
+            outputs[destination] = render_post(source, metadata, body)
         except (OSError, ValueError) as error:
             parser.exit(1, f"{source}: {error}\n")
-        print(f"{source} -> {destination}")
+        indexes.setdefault(destination.parent, []).append((destination.name, metadata))
+    for directory, posts in indexes.items():
+        outputs[directory / "index.html"] = render_index(posts)
+    for destination, content in outputs.items():
+        try:
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_text(content, encoding="utf-8")
+        except OSError as error:
+            parser.exit(1, f"{destination}: {error}\n")
+        print(destination)
 
 
 if __name__ == "__main__":
