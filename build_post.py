@@ -61,6 +61,8 @@ STYLE = """
       p, ul, ol { margin: 0 0 18px; }
       h2 { margin: 34px 0 16px; font-size: 23px; line-height: 1.5; font-weight: 400; }
       h3 { margin: 24px 0 8px; font-size: 17px; font-weight: 600; }
+      pre { margin: 20px 0; padding: 12px 16px; overflow-x: auto; border: 1px solid var(--line); background: var(--wash); font-size: 13px; line-height: 1.7; }
+      pre code { overflow-wrap: normal; }
       .aside { color: var(--muted); font-size: 14px; }
       .citation { font-size: 12px; vertical-align: super; white-space: nowrap; }
       .equation { margin: 24px 0; padding: 12px 20px; border: 1px solid var(--line); background: var(--wash); }
@@ -84,6 +86,18 @@ STYLE = """
       .arrow-mobile { display: none; }
       .feedback { width: 66%; margin: 0 0 0 auto; padding: 12px; border: 1px solid var(--line); border-top: 0; color: var(--muted); text-align: center; font-size: 12px; }
       .diagram figcaption { margin-top: 10px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+      .simt-panel { padding: 18px; border: 1px solid var(--line); }
+      .simt-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; margin-bottom: 12px; font-size: 13px; }
+      .simt-legend { color: var(--muted); font-size: 12px; }
+      .simt-timeline { table-layout: fixed; border-collapse: separate; border-spacing: 5px 8px; margin: 0; }
+      .simt-timeline thead { background: none; }
+      .simt-timeline th, .simt-timeline td { padding: 0; border: 0; text-align: center; font-size: 13px; font-weight: 400; }
+      .simt-timeline th:first-child { width: 66px; }
+      .simt-slot { display: flex; align-items: center; justify-content: center; min-height: 42px; border: 1px solid var(--line); color: var(--muted); background: var(--wash); }
+      .simt-slot.simt-a { color: #315e91; background: #dceafb; border-color: #92b4de; }
+      .simt-slot.simt-b { color: #97591f; background: #ffe9d4; border-color: #dbab7e; }
+      .simt-slot.simt-c { color: #326d59; background: #d9eee4; border-color: #8cbda6; }
+      .simt-note { margin: 10px 0 0; color: var(--muted); font-size: 12px; }
       .references { padding-left: 26px; font-size: 14px; }
       .references li { margin-bottom: 14px; padding-left: 5px; }
       .references li:target { background: var(--wash); outline: 5px solid var(--wash); }
@@ -105,6 +119,11 @@ STYLE = """
         .arrow-desktop { display: none; }
         .arrow-mobile { display: inline; }
         .feedback { width: 90%; margin: 0 auto; }
+        .simt-panel { padding: 10px; }
+        .simt-timeline { border-spacing: 3px 6px; }
+        .simt-timeline th, .simt-timeline td { font-size: 11px; }
+        .simt-timeline th:first-child { width: 44px; }
+        .simt-slot { min-height: 36px; }
       }
       @media print {
         .site-header, .post-footer { display: none; }
