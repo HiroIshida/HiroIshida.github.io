@@ -1,1 +1,5 @@
 *~
+/blog/*.html
+/_site/
+/.venv/
+__pycache__/
