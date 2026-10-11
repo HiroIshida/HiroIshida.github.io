@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>美味しいカレーの作り方 | Hirokazu Ishida</title>
+    <meta name="description" content="玉ねぎを炒め、スパイスを加え、なぜか目的関数を定義する。数式と調理工程図で考える、美味しいカレーの作り方。">
+    <link rel="canonical" href="https://hiroishida.github.io/blog/curry.html">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-svg.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      :root {
+        color-scheme: light;
+        --ink: #111;
+        --muted: #66717c;
+        --accent: #446884;
+        --line: #dce2e8;
+        --wash: #f3f5f7;
+        --paper: #fdfdfd;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font: 400 16px/1.8 "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+        overflow-wrap: break-word;
+      }
+      .wrapper { max-width: 800px; margin: 0 auto; padding: 0 30px; }
+      .site-header { border-top: 5px solid #424242; border-bottom: 1px solid #e8e8e8; }
+      .site-header .wrapper { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 12px; padding-bottom: 12px; }
+      .site-name { color: var(--ink); font-size: 20px; font-weight: 300; letter-spacing: -.5px; }
+      .back-link { white-space: nowrap; font-size: 14px; }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { color: var(--ink); text-decoration: underline; }
+      a:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+      .site-name { text-decoration: none; }
+      main.wrapper { padding-top: 30px; padding-bottom: 30px; }
+      .post-header { margin-bottom: 26px; }
+      h1 { margin: 0 0 8px; font-size: 28px; line-height: 1.5; font-weight: 400; }
+      .metadata { display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--muted); font-size: 13px; }
+      p, ul, ol { margin: 0 0 18px; }
+      h2 { margin: 34px 0 16px; font-size: 23px; line-height: 1.5; font-weight: 400; }
+      h3 { margin: 24px 0 8px; font-size: 17px; font-weight: 600; }
+      .aside { color: var(--muted); font-size: 14px; }
+      .citation { font-size: 12px; vertical-align: super; white-space: nowrap; }
+      .equation { margin: 24px 0; padding: 12px 20px; border: 1px solid var(--line); background: var(--wash); }
+      .math-scroll { overflow-x: auto; overflow-y: hidden; }
+      .equation figcaption { color: var(--muted); text-align: right; font-size: 13px; }
+      .equation mjx-container[display="true"] { margin: 12px 0 !important; }
+      .ingredients { width: 100%; margin: 20px 0; border-collapse: collapse; font-size: 15px; }
+      .ingredients caption { padding-bottom: 10px; text-align: left; color: var(--muted); font-size: 13px; }
+      .ingredients th, .ingredients td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+      .ingredients thead { background: var(--wash); }
+      .ingredients th { font-weight: 600; }
+      .ingredients td:last-child { color: var(--muted); }
+      .diagram { margin: 24px 0 28px; }
+      .diagram-panel { padding: 12px 0; }
+      .flow { display: grid; grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr) 30px minmax(0, 1fr); align-items: stretch; }
+      .flow-node { padding: 16px 14px; border: 1px solid var(--line); background: var(--wash); }
+      .flow-node strong { display: block; margin-bottom: 8px; font-size: 17px; font-weight: 500; }
+      .node-input { min-height: 44px; margin-bottom: 12px; font-size: 13px; line-height: 1.7; }
+      .node-output { margin: 0; color: var(--muted); font-size: 13px; }
+      .flow-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 20px; }
+      .arrow-mobile { display: none; }
+      .feedback { width: 66%; margin: 0 0 0 auto; padding: 12px; border: 1px solid var(--line); border-top: 0; color: var(--muted); text-align: center; font-size: 12px; }
+      .diagram figcaption { margin-top: 10px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+      .references { padding-left: 26px; font-size: 14px; }
+      .references li { margin-bottom: 14px; padding-left: 5px; }
+      .references li:target { background: var(--wash); outline: 5px solid var(--wash); }
+      .references cite { font-style: normal; }
+      .post-footer { margin-top: 38px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; }
+      @media (max-width: 600px) {
+        .wrapper { padding-right: 15px; padding-left: 15px; }
+        .site-name { font-size: 17px; }
+        h1 { font-size: 26px; }
+        h2 { font-size: 21px; }
+        .equation { padding: 10px; }
+        .ingredients th, .ingredients td { padding: 10px 7px; font-size: 13px; }
+        .ingredients td:first-child { width: 34%; }
+        .flow { grid-template-columns: minmax(0, 1fr); }
+        .flow-node { padding: 14px 18px; }
+        .node-input { min-height: 0; margin-bottom: 8px; }
+        .flow-arrow { height: 34px; }
+        .arrow-desktop { display: none; }
+        .arrow-mobile { display: inline; }
+        .feedback { width: 90%; margin: 0 auto; }
+      }
+      @media print {
+        .site-header, .post-footer { display: none; }
+        main.wrapper { padding-top: 0; }
+        .equation, .diagram, .ingredients { break-inside: avoid; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-name" href="../index.html">Hirokazu Ishida</a>
+        <a class="back-link" href="../index.html">← Home</a>
+      </div>
+    </header>
+
+    <main class="wrapper">
+      <article aria-labelledby="post-title">
+        <header class="post-header">
+          <h1 id="post-title">美味しいカレーの作り方</h1>
+          <div class="metadata">
+            <time datetime="2026-10-12">2026年10月12日</time>
+            <span>Hirokazu Ishida</span>
+          </div>
+        </header>
+
+        <p>記念すべき最初の記事なので、壮大な話をしようと思った。けれど、お腹が空いたのでカレーを作ることにした。せっかくなので、鍋の中で起きることを少しだけ研究っぽく眺めてみる。</p>
+        <p class="aside">以下の数式は料理を大げさに説明するための遊びで、実測に基づくモデルではありません。末尾の参考文献もすべて架空です。カレーの手順は普通に使えます。</p>
+
+        <section aria-labelledby="objective">
+          <h2 id="objective">まず、目的関数を定義する</h2>
+          <p>「美味しい」では仕様が曖昧すぎる。そこで、香りを \(A\)、うま味を \(U\)、好みの塩加減への近さを \(S\)、焦げによる苦味を \(B\) とし、それぞれを 0〜1 の気分で評価する。今回の目的関数は次の通りである。<a class="citation" href="#ref-1" aria-label="架空の参考文献1">[1]</a></p>
+          <figure class="equation">
+            <div class="math-scroll" tabindex="0" role="region" aria-label="式1：カレーの美味しさの目的関数">
+              \[
+                \begin{aligned}
+                  \boldsymbol{x}^{\star} &amp;= \arg\max_{\boldsymbol{x}} J(\boldsymbol{x}) \\
+                  J(\boldsymbol{x}) &amp;= 2A + U + S - 5B
+                \end{aligned}
+              \]
+            </div>
+            <figcaption>(1)</figcaption>
+          </figure>
+          <p>操作する変数 \(\boldsymbol{x}\) は、火加減、加熱時間、塩の量など。係数に根拠はない。ただ、「焦がしたときの悲しさ」を重く評価している。香りを少し増やすために鍋底を炭にしてはいけない。</p>
+        </section>
+
+        <section aria-labelledby="ingredients">
+          <h2 id="ingredients">実験装置と材料</h2>
+          <p>必要な装置は、厚手の鍋、木べら、包丁、まな板。GPUは要らない。ご飯は先に炊いておく。これは計算と通信のオーバーラップに相当する。</p>
+          <table class="ingredients">
+            <caption>表1. 2人分の入力パラメータ（調理時間の目安：約40分）</caption>
+            <thead>
+              <tr><th scope="col">材料</th><th scope="col">分量</th><th scope="col">担当</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>玉ねぎ</td><td>1個</td><td>甘みと土台</td></tr>
+              <tr><td>鶏もも肉</td><td>250 g</td><td>うま味と満足感</td></tr>
+              <tr><td>カットトマト</td><td>200 g</td><td>酸味とうま味</td></tr>
+              <tr><td>にんにく・生姜</td><td>各1かけ</td><td>香りの立ち上がり</td></tr>
+              <tr><td>カレー粉</td><td>大さじ1</td><td>主役の香り</td></tr>
+              <tr><td>サラダ油</td><td>大さじ1</td><td>炒めるための油</td></tr>
+              <tr><td>水</td><td>150 mLから調整</td><td>煮込みと濃度調整</td></tr>
+              <tr><td>塩</td><td>小さじ1/2を目安に調整</td><td>味の輪郭</td></tr>
+              <tr><td>無糖ヨーグルト</td><td>大さじ2</td><td>仕上げのまろやかさ</td></tr>
+              <tr><td>ご飯</td><td>2人分</td><td>最終出力の受け皿</td></tr>
+            </tbody>
+          </table>
+          <p class="aside">カレー粉は、塩の入っていないスパイスミックスを想定。市販のカレールウを使う場合は、箱に書かれた分量と手順を優先する。先行研究を尊重したい。</p>
+        </section>
+
+        <section aria-labelledby="method">
+          <h2 id="method">提案手法：炒めて、煮て、味見する</h2>
+          <p>全体の構成を図1に示す。重要なのは、最後の味見から前の工程へ戻るループである。一度で正解を出そうとせず、少しずつ近づける。</p>
+
+          <figure class="diagram" aria-labelledby="diagram-caption">
+            <div class="diagram-panel">
+              <div class="flow">
+                <div class="flow-node">
+                  <strong>炒める</strong>
+                  <p class="node-input">玉ねぎ・油<br>にんにく・生姜・カレー粉</p>
+                  <p class="node-output">香りと甘みの土台</p>
+                </div>
+                <span class="flow-arrow" aria-hidden="true"><span class="arrow-desktop">→</span><span class="arrow-mobile">↓</span></span>
+                <div class="flow-node">
+                  <strong>煮込む</strong>
+                  <p class="node-input">鶏肉・トマト・水<br>弱火で、ふつふつと</p>
+                  <p class="node-output">具材に火を通し、味をまとめる</p>
+                </div>
+                <span class="flow-arrow" aria-hidden="true"><span class="arrow-desktop">→</span><span class="arrow-mobile">↓</span></span>
+                <div class="flow-node">
+                  <strong>味見する</strong>
+                  <p class="node-input">塩・ヨーグルト<br>最後は自分の舌で評価</p>
+                  <p class="node-output">ちょうどよければ、ご飯へ</p>
+                </div>
+              </div>
+              <div class="feedback">↺ まだ薄い？ 塩・水・煮込み時間を調整して、もう一度。</div>
+            </div>
+            <figcaption id="diagram-caption">図1. カレー生成システムの構成。味見によるフィードバックを持つ。評価器は人間なので、お腹の空き具合によって出力が変動する。</figcaption>
+          </figure>
+
+          <h3>1. 玉ねぎを、焦らず炒める</h3>
+          <p>玉ねぎは薄切り、にんにくと生姜はみじん切り、鶏肉はひと口大にする。鍋に油を入れ、玉ねぎを中火で10〜15分ほど炒める。薄いきつね色になれば十分。焦げ付きそうなら火を弱め、水を少量足して鍋底をこそげる。飴色という単語に人生を支配されないこと。</p>
+
+          <h3>2. 香りを立てて、トマトを加える</h3>
+          <p>にんにくと生姜を加えて1分ほど炒める。弱火にしてカレー粉を加え、20〜30秒ほど混ぜたら、トマトを投入する。中火に戻し、へらで混ぜながら3〜5分ほど煮詰める。スパイスを入れてからメールを確認するのはやめよう。焦げのペナルティ係数は5である。<a class="citation" href="#ref-2" aria-label="架空の参考文献2">[2]</a></p>
+
+          <h3>3. 鶏肉を加えて、弱火で煮込む</h3>
+          <p>鶏肉を加えて全体にからめ、水150 mLと塩の半量を加える。煮立ったら弱火にし、ふたを少しずらして15〜20分ほど、鶏肉の中心まで十分に火が通るまで煮る。ときどき混ぜ、水分が足りなければ少量ずつ足す。ここで初めて、鍋の前で何もしない時間が生まれる。</p>
+
+          <h3>4. 味を整えて、ご飯にかける</h3>
+          <p>火を止め、ヨーグルトを混ぜる。少量を取り、少し冷ましてから味見する。残りの塩は一度に入れず、必要な分だけひとつまみずつ。濃ければ水でのばし、薄ければ弱火で少し煮詰める。ひと手間ごとに味見して、ちょうどよくなったところでご飯にかける。</p>
+        </section>
+
+        <section aria-labelledby="feedback">
+          <h2 id="feedback">味見はフィードバック制御である</h2>
+          <p>現在の塩の量を \(s_k\)、味の物足りなさを \(e_k\) とすると、塩の追加は次の更新則として書ける。<a class="citation" href="#ref-3" aria-label="架空の参考文献3">[3]</a></p>
+          <figure class="equation">
+            <div class="math-scroll" tabindex="0" role="region" aria-label="式2：味見に基づく塩の調整">
+              \[
+                s_{k+1} = s_k + \eta\,\max(0, e_k)
+              \]
+            </div>
+            <figcaption>(2)</figcaption>
+          </figure>
+          <p>\(\eta\) は一度に足す量を決める係数である。要するに、<strong>塩は少しずつ入れる</strong>。大きな更新幅は素早い収束をもたらすかもしれないが、塩辛さへの発散も招く。しかも、一度入れた塩を鍋から取り出す操作は実装されていない。</p>
+          <p>美味しくなったら終了する。最適解であることの証明は要らない。温かいうちに食べるほうが大切だ。</p>
+          <p>玉ねぎを炒める。スパイスを焦がさない。塩は少しずつ。数式を全部読み飛ばしても、カレーは美味しく作れる。</p>
+        </section>
+
+        <section aria-labelledby="references">
+          <h2 id="references">参考文献</h2>
+          <p class="aside">以下は記事の体裁を楽しむためのダミーです。著者・論文・掲載誌はいずれも架空で、実在の研究を引用したものではありません。</p>
+          <ol class="references">
+            <li id="ref-1"><cite>玉葱 太郎・香辛 花子, 「家庭内カレー最適化における空腹バイアスの影響」</cite>, <i>日本夕飯学会誌</i>, vol. 1, no. 1, pp. 1–8, 2026.</li>
+            <li id="ref-2"><cite>C. Cumin and T. Turmeric, “Attention Is All You Need While Frying Spices,”</cite> <i>Proceedings of the International Conference on Computational Curry</i>, pp. 42–49, 2025.</li>
+            <li id="ref-3"><cite>鍋底 まもる, 「ひとつまみずつ：不可逆な調味操作のための保守的フィードバック制御」</cite>, <i>Transactions on Taste and Control</i>, vol. 3, no. 2, pp. 15–22, 2026.</li>
+          </ol>
+        </section>
+
+        <footer class="post-footer"><a href="../index.html">← トップページへ戻る</a></footer>
+      </article>
+    </main>
+  </body>
+</html>
