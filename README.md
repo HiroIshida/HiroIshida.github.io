@@ -8,7 +8,9 @@ step. Posts are written in Markdown and converted with `build_post.py`.
 
 ## Posts
 
-Edit `post/curry.md`, then run:
+Writing guidelines for new posts and revisions are in [AGENTS.md](AGENTS.md).
+
+Edit a Markdown file such as `post/nvidia_gpu_internal.md`, then run:
 
 ```sh
 python3 -m pip install Markdown==3.7  # once; Python 3.8 or newer
@@ -19,9 +21,9 @@ Or use `uv run build_post.py` to install the script's declared dependency in an
 isolated environment automatically.
 
 By default, the script converts every `post/*.md` and writes HTML next to each
-source: `post/curry.md` becomes `post/curry.html`. It also generates
-`post/index.html`, listing titles and dates with links to all posts, newest
-first. Both the article HTML and index HTML are ignored by Git; commit the
+source: `post/nvidia_gpu_internal.md` becomes `post/nvidia_gpu_internal.html`.
+It also generates `post/index.html`, listing titles and dates with links to all
+posts, newest first. Both the article HTML and index HTML are ignored by Git; commit the
 Markdown and Python source instead. To choose another output directory:
 
 ```sh
@@ -29,8 +31,8 @@ python3 build_post.py --output-dir _site/post
 ```
 
 You can also pass specific Markdown files, for example
-`python3 build_post.py post/curry.md`. In that case, the generated index lists
-only those files. Run without filenames to rebuild the complete index.
+`python3 build_post.py post/nvidia_gpu_internal.md`. In that case, the generated
+index lists only those files. Run without filenames to rebuild the complete index.
 `index.md` is reserved because `index.html` is generated automatically.
 
 The single Python file contains the page template and CSS. Each Markdown file
@@ -44,12 +46,14 @@ code fences. Use `markdown="1"` on an HTML container to parse Markdown inside it
 Put shared assets in `asset/` and refer to them as `../asset/filename` from posts.
 
 Write inline math as `\(...\)` and display math as `\[...\]`, without blank lines
-within an equation. `curry.md` keeps its display equations in HTML figures to
-retain their borders and captions. MathJax loads from a CDN, so typesetting
-requires an internet connection. The build itself does not fetch MathJax.
+within an equation. `nvidia_gpu_internal.md` wraps its display equation in a
+`<div class="equation math-scroll">` for a border and horizontal scrolling.
+MathJax loads from a CDN, so typesetting requires an internet connection.
+The build itself does not fetch MathJax.
 
-The article index is at `/post/`, and the curry article is at `/post/curry.html`.
-Each article links back to the index. The homepage does not link to the posts.
+The article index is at `/post/`, and the GPU article is at
+`/post/nvidia_gpu_internal.html`. Each article links back to the index.
+The homepage does not link to the posts.
 
 ## Local preview
 
