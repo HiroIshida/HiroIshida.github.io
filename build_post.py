@@ -15,6 +15,7 @@ from xml.etree.ElementTree import Element
 try:
     import markdown
     from markdown.inlinepatterns import InlineProcessor
+    from markdown.preprocessors import Preprocessor
     from markdown.util import AtomicString
 except ImportError:
     raise SystemExit("Install Markdown: python3 -m pip install Markdown==3.7\n"
@@ -141,11 +142,37 @@ class MathJaxPattern(InlineProcessor):
         return element, match.start(0), match.end(0)
 
 
+class BuildIgnorePreprocessor(Preprocessor):
+    """Remove author notes entirely, while preserving fenced code examples."""
+
+    def run(self, lines):
+        visible = []
+        ignoring = False
+        for line in lines:
+            marker = line.rstrip()
+            if marker == "<!-- build:ignore:start -->":
+                if ignoring:
+                    raise ValueError("nested build:ignore:start marker")
+                ignoring = True
+                visible.append("")
+            elif marker == "<!-- build:ignore:end -->":
+                if not ignoring:
+                    raise ValueError("build:ignore:end without a start marker")
+                ignoring = False
+            elif not ignoring:
+                visible.append(line)
+        if ignoring:
+            raise ValueError("unclosed build:ignore:start (missing build:ignore:end)")
+        return visible
+
+
 def read_post(source):
     md = markdown.Markdown(
         extensions=["meta", "tables", "fenced_code", "attr_list", "md_in_html"],
         output_format="html",
     )
+    # Fenced code is stashed at priority 25; raw HTML is handled at priority 20.
+    md.preprocessors.register(BuildIgnorePreprocessor(md), "build_ignore", 24)
     md.inlinePatterns.register(
         MathJaxPattern(r"(?s)\\\(.+?\\\)|\\\[.+?\\\]", md), "mathjax", 185
     )

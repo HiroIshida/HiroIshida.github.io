@@ -55,6 +55,34 @@ The article index is at `/post/`, and the GPU article is at
 `/post/nvidia_gpu_internal.html`. Each article links back to the index.
 The homepage does not link to the posts.
 
+### Author notes and drafts
+
+Articles can live in `post/` while they are still outlines or drafts. They appear
+in the article index even if all body content is inside an ignored block;
+`[WIP]` in a title does not exclude them from the build. Only when you want to
+omit an entire draft from the default build, keep it outside `post/`, for example
+in `drafts/`.
+
+To retain follow-up ideas in an article's Markdown, put them after the metadata
+inside an ignored block:
+
+```markdown
+<!-- build:ignore:start -->
+## 次の記事にいれる
+
+- 次回取り上げる問いと、調べる資料をここに残す。
+
+<!-- build:ignore:end -->
+```
+
+Write each marker on its own line, without indentation. `build_post.py` removes
+the entire block, including the markers, from generated HTML. It is not retained
+as an HTML comment. Multiple blocks are allowed, but nesting, an unmatched end,
+or a missing end stops the build. Markers inside fenced code blocks are literal
+examples and are not processed. The Markdown source retains the notes.
+
+Run the build checks with `python3 -m unittest discover -s tests`.
+
 ## Local preview
 
 After building, open `post/index.html` directly in a browser, or serve this
