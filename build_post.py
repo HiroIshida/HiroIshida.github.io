@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # /// script
 # requires-python = ">=3.8"
-# dependencies = ["Markdown==3.7"]
+# dependencies = ["Markdown==3.7", "Pygments==2.18.0"]
 # ///
 """Render post/*.md and an article index, optionally into --output-dir."""
 
@@ -17,14 +17,16 @@ try:
     from markdown.inlinepatterns import InlineProcessor
     from markdown.preprocessors import Preprocessor
     from markdown.util import AtomicString
+    from pygments.formatters import HtmlFormatter
 except ImportError:
-    raise SystemExit("Install Markdown: python3 -m pip install Markdown==3.7\n"
+    raise SystemExit("Install dependencies: python3 -m pip install Markdown==3.7 Pygments==2.18.0\n"
                      "Or run: uv run build_post.py")
 
 
 ROOT = Path(__file__).resolve().parent
 AUTHOR = "Hirokazu Ishida"
 SITE_URL = "https://hiroishida.github.io"
+HIGHLIGHT_STYLE = HtmlFormatter(style="friendly", nobackground=True).get_style_defs(".codehilite")
 STYLE = """
       * { box-sizing: border-box; }
       :root {
@@ -54,6 +56,12 @@ STYLE = """
       .site-name { text-decoration: none; }
       main.wrapper { padding-top: 30px; padding-bottom: 30px; }
       .post-header { margin-bottom: 26px; }
+      .post-nav { position: sticky; top: 0; z-index: 10; margin: 0 0 24px; padding: 12px 0; border-bottom: 1px solid var(--line); background: var(--paper); }
+      .post-nav-title { display: none; }
+      .post-nav ul { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0; padding: 0; list-style: none; }
+      .post-nav a { display: block; padding: 8px 12px; border-left: 2px solid var(--line); font-size: 14px; }
+      .post-nav a:hover, .post-nav a:focus-visible { border-left-color: var(--accent); }
+      .post-section, .post-nav ~ .references li { scroll-margin-top: 120px; }
       h1 { margin: 0 0 8px; font-size: 28px; line-height: 1.5; font-weight: 400; }
       .metadata { display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--muted); font-size: 13px; }
       .post-list { margin: 24px 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
@@ -64,6 +72,7 @@ STYLE = """
       h3 { margin: 24px 0 8px; font-size: 17px; font-weight: 600; }
       pre { margin: 20px 0; padding: 12px 16px; overflow-x: auto; border: 1px solid var(--line); background: var(--wash); font-size: 13px; line-height: 1.7; }
       pre code { overflow-wrap: normal; }
+      .codehilite .c, .codehilite .ch, .codehilite .c1, .codehilite .cm, .codehilite .cs { color: var(--muted); font-style: normal; }
       .aside { color: var(--muted); font-size: 14px; }
       .citation { font-size: 12px; vertical-align: super; white-space: nowrap; }
       .equation { margin: 24px 0; padding: 12px 20px; border: 1px solid var(--line); background: var(--wash); }
@@ -104,12 +113,21 @@ STYLE = """
       .references li:target { background: var(--wash); outline: 5px solid var(--wash); }
       .references cite { font-style: normal; }
       .post-footer { margin-top: 38px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; }
+      @media (min-width: 1200px) {
+        .post-nav { position: fixed; top: 140px; left: max(20px, calc((100vw - 800px) / 2 - 200px)); width: 180px; max-height: calc(100vh - 160px); overflow-y: auto; margin: 0; padding: 0; border: 0; }
+        .post-nav-title { display: block; margin-bottom: 12px; color: var(--muted); font-size: 12px; }
+        .post-nav ul { display: block; }
+        .post-nav li + li { margin-top: 6px; }
+        .post-section, .post-nav ~ .references li { scroll-margin-top: 24px; }
+      }
       @media (max-width: 600px) {
         .wrapper { padding-right: 15px; padding-left: 15px; }
         .site-name { font-size: 17px; }
         h1 { font-size: 26px; }
         h2 { font-size: 21px; }
         .post-list li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+        .post-nav ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 8px; }
+        .post-nav a { min-height: 44px; padding: 9px 8px; font-size: 13px; }
         .equation { padding: 10px; }
         table th, table td { padding: 10px 7px; font-size: 13px; }
         table td:first-child { width: 34%; }
@@ -127,7 +145,7 @@ STYLE = """
         .simt-slot { min-height: 36px; }
       }
       @media print {
-        .site-header, .post-footer { display: none; }
+        .site-header, .post-footer, .post-nav { display: none; }
         main.wrapper { padding-top: 0; }
         .equation, .diagram, table { break-inside: avoid; }
       }"""
@@ -168,7 +186,8 @@ class BuildIgnorePreprocessor(Preprocessor):
 
 def read_post(source):
     md = markdown.Markdown(
-        extensions=["meta", "tables", "fenced_code", "attr_list", "md_in_html"],
+        extensions=["meta", "tables", "fenced_code", "codehilite", "attr_list", "md_in_html"],
+        extension_configs={"codehilite": {"guess_lang": False, "pygments_style": "friendly"}},
         output_format="html",
     )
     # Fenced code is stashed at priority 25; raw HTML is handled at priority 20.
@@ -196,7 +215,8 @@ def page(title, description, canonical, body, navigation, mathjax=False):
     <meta name="description" content="{escape(description)}">
     <link rel="canonical" href="{escape(SITE_URL + canonical)}">
     {script}
-    <style>{STYLE}
+    <style>{HIGHLIGHT_STYLE}
+    {STYLE}
     </style>
   </head>
   <body>

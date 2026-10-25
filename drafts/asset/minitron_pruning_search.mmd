@@ -1,0 +1,37 @@
+---
+config:
+  theme: base
+  look: classic
+  fontFamily: Arial
+  themeVariables:
+    fontFamily: Arial
+    fontSize: 18px
+    primaryColor: '#ffffff'
+    primaryTextColor: '#111111'
+    primaryBorderColor: '#98a2ab'
+    lineColor: '#66717c'
+    edgeLabelBackground: '#fdfdfd'
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 18
+    rankSpacing: 32
+    padding: 12
+---
+%% Render with @mermaid-js/mermaid-cli@12.0.0:
+%% mmdc -i drafts/asset/minitron_pruning_search.mmd -o drafts/asset/minitron_pruning_search.svg -b transparent
+flowchart TB
+    accTitle: Minitronのimportance評価とNASの関係
+    accDescr: 元モデルでimportance順位を計算し、サイズ制約を満たす構造A・Bに合わせて、それぞれpruneする。各候補を短く再学習し、検証損失で比較する。選んだ候補をさらに学習する。他の候補も同様に評価する。
+
+    M["元モデル<br/>重要度を計算"]
+    A["構造Aを指定<br/>順位でprune"]
+    B["構造Bを指定<br/>順位でprune"]
+    RA["短く再学習"]
+    RB["短く再学習"]
+    E["検証損失で<br/>候補を選ぶ"]
+    F["選んだ候補を<br/>本格的に学習"]
+
+    M --> A --> RA --> E
+    M --> B --> RB --> E
+    E --> F

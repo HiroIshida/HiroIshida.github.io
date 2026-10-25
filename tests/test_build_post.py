@@ -52,7 +52,8 @@ class BuildIgnoreTests(unittest.TestCase):
                 _, body = self.read(
                     f"{fence}markdown\n{START}\nEXAMPLE_NOTE\n{END}\n{fence}\n"
                 )
-                self.assertIn("<pre><code", body)
+                self.assertIn("<pre>", body)
+                self.assertIn("<code>", body)
                 self.assertIn("&lt;!-- build:ignore:start --&gt;", body)
                 self.assertIn("EXAMPLE_NOTE", body)
                 self.assertIn("&lt;!-- build:ignore:end --&gt;", body)

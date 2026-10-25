@@ -1,0 +1,36 @@
+---
+config:
+  theme: base
+  look: classic
+  fontFamily: Arial
+  themeVariables:
+    fontFamily: Arial
+    fontSize: 16px
+    primaryColor: '#ffffff'
+    primaryTextColor: '#111111'
+    primaryBorderColor: '#98a2ab'
+    lineColor: '#66717c'
+    edgeLabelBackground: '#fdfdfd'
+  flowchart:
+    htmlLabels: false
+    curve: linear
+    nodeSpacing: 32
+    rankSpacing: 40
+    padding: 14
+---
+%% Render with @mermaid-js/mermaid-cli@12.0.0:
+%% mmdc -i drafts/asset/structural_distillation_citations.mmd -o drafts/asset/structural_distillation_citations.svg -b transparent
+flowchart LR
+    accTitle: LLMの構造化プルーニング論文の引用関係
+    accDescr: MinitronがSheared LLaMAとSliceGPTを引用。FLAPと他の3本の間には、確認した版では直接の引用が見当たらない。日付はarXiv初稿の投稿日。
+
+    M["Minitron<br/>2024-07-19"]
+    S["Sheared LLaMA<br/>2023-10-10"]
+    G["SliceGPT<br/>2024-01-26"]
+    F["FLAP<br/>2023-12-19"]
+
+    M -->|引用| S
+    M -->|引用| G
+
+    classDef unlinked stroke-dasharray: 4 4;
+    class F unlinked;

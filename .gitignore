@@ -1,5 +1,6 @@
 *~
 /post/*.html
+/drafts/*.html
 /_site/
 /.venv/
 __pycache__/

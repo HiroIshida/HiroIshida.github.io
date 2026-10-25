@@ -13,11 +13,11 @@ Writing guidelines for new posts and revisions are in [AGENTS.md](AGENTS.md).
 Edit a Markdown file such as `post/nvidia_gpu_internal.md`, then run:
 
 ```sh
-python3 -m pip install Markdown==3.7  # once; Python 3.8 or newer
+python3 -m pip install Markdown==3.7 Pygments==2.18.0  # once; Python 3.8 or newer
 python3 build_post.py
 ```
 
-Or use `uv run build_post.py` to install the script's declared dependency in an
+Or use `uv run build_post.py` to install the script's declared dependencies in an
 isolated environment automatically.
 
 By default, the script converts every `post/*.md` and writes HTML next to each
@@ -41,7 +41,12 @@ starts with simple metadata (`title`, `date` in `YYYY-MM-DD` format, and optiona
 extension, not full YAML: write plain values without quotes.
 
 Normal Markdown, tables, fenced code blocks, and raw HTML/SVG/JavaScript are
-supported. Put scripts or custom diagrams directly in the Markdown, outside
+supported. Add a language name after the opening code fence (for example,
+`python`) to enable syntax highlighting. CodeHilite and Pygments generate the
+highlighted HTML during the Python build; no browser-side highlighter is needed.
+Code without a language name stays unhighlighted.
+
+Put scripts or custom diagrams directly in the Markdown, outside
 code fences. Use `markdown="1"` on an HTML container to parse Markdown inside it.
 Put shared assets in `asset/` and refer to them as `../asset/filename` from posts.
 
@@ -62,6 +67,14 @@ in the article index even if all body content is inside an ignored block;
 `[WIP]` in a title does not exclude them from the build. Only when you want to
 omit an entire draft from the default build, keep it outside `post/`, for example
 in `drafts/`.
+
+Keep unpublished diagrams in `drafts/asset/` too, and reference them as
+`asset/filename.svg` from the draft. The Pages workflow does not copy `drafts/`
+into its deployment artifact. Preview a draft locally with
+`python3 build_post.py drafts/structural_distillation.md`; its HTML and index
+are generated in `drafts/` and ignored by Git. To publish it later, move the
+Markdown to `post/`, move its assets to `asset/`, and update the image paths to
+`../asset/filename.svg`.
 
 To retain follow-up ideas in an article's Markdown, put them after the metadata
 inside an ignored block:
